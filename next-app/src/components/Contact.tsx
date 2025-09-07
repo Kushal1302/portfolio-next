@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const Contact: React.FC = () => {
@@ -9,6 +9,11 @@ const Contact: React.FC = () => {
     message: "",
   });
   const [errors, setErrors] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -16,6 +21,7 @@ const Contact: React.FC = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
+    setStatus(null); // clear previous status on input
   };
 
   const validateForm = () => {
@@ -40,19 +46,44 @@ const Contact: React.FC = () => {
     return isValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      alert("Form submitted! (Backend integration pending)");
-      setFormData({ name: "", email: "", message: "" });
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setStatus({
+          type: "success",
+          message: "Your message has been sent! We’ll get back to you soon.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setStatus({
+          type: "error",
+          message: "Failed to send message. Please try again.",
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus({
+        type: "error",
+        message: "Something went wrong. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <section
-      id="contact"
-      className="relative py-20 px-6 bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] overflow-hidden"
-    >
+    <section id="contact" className="relative py-20 px-6 bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] overflow-hidden">
       {/* Floating shapes */}
       <div className="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-[#6C63FF]/20 animate-pulse blur-3xl"></div>
       <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-[#8B5CF6]/20 animate-pulse blur-3xl"></div>
@@ -66,7 +97,8 @@ const Contact: React.FC = () => {
         Reach Our Team
       </motion.h2>
 
-      <motion.div
+      <motion.form
+        onSubmit={handleSubmit}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -76,7 +108,7 @@ const Contact: React.FC = () => {
         }}
         className="max-w-lg mx-auto bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl shadow-lg p-8"
       >
-        {["name", "email", "message"].map((field, index) => (
+        {["name", "email", "message"].map((field) => (
           <motion.div
             key={field}
             variants={{
@@ -114,17 +146,28 @@ const Contact: React.FC = () => {
 
         <motion.button
           type="submit"
-          onClick={handleSubmit}
+          disabled={isSubmitting}
           variants={{
             hidden: { opacity: 0, y: 20 },
             visible: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 0.5 }}
-          className="w-full bg-gradient-to-r from-[#6C63FF] to-[#8B5CF6] text-white py-3 rounded-md hover:from-[#5B55E0] hover:to-[#7C3AED] transition-all shadow-lg mt-4"
+          className="w-full bg-gradient-to-r from-[#6C63FF] to-[#8B5CF6] text-white py-3 rounded-md hover:from-[#5B55E0] hover:to-[#7C3AED] transition-all shadow-lg mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Send Message
+          {isSubmitting ? "Sending..." : "Send Message"}
         </motion.button>
-      </motion.div>
+
+        {/* Status message */}
+        {status && (
+          <p
+            className={`mt-4 text-center text-sm ${
+              status.type === "success" ? "text-green-400" : "text-red-400"
+            }`}
+          >
+            {status.message}
+          </p>
+        )}
+      </motion.form>
     </section>
   );
 };

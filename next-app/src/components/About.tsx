@@ -3,11 +3,14 @@ import { motion } from "framer-motion";
 
 const About: React.FC = () => {
   const points = [
-    "We specialize in building modern, scalable websites using Next.js, React, and Node.js.",
-    "Our team focuses on high-performance web applications with smooth user experiences.",
-    "We integrate robust backend solutions, APIs, and databases to deliver complete digital products.",
-    "Tailored solutions for businesses — from landing pages to full-fledged enterprise applications.",
-    "Our workflow emphasizes clean code, maintainable architecture, and latest web technologies."
+    { title: "Modern Web Development", desc: "We specialize in building scalable websites with Next.js, React, and Node.js." },
+    { title: "Backend Implementation", desc: "Robust APIs, databases, and server-side logic for seamless digital products." },
+    { title: "Deployment & Automation", desc: "CI/CD pipelines, automated deployments, and workflow optimization." },
+    { title: "AWS & CloudWatch", desc: "Cloud hosting, monitoring, and infrastructure management for reliability." },
+    { title: "SEO Optimization", desc: "On-page & technical SEO to boost visibility and search rankings." },
+    { title: "High Performance", desc: "Optimized websites and apps for speed, responsiveness, and UX." },
+    { title: "Tailored Solutions", desc: "Custom solutions from landing pages to enterprise-level apps." },
+    { title: "Clean & Maintainable Code", desc: "We follow best practices to ensure scalable and maintainable projects." },
   ];
 
   return (
@@ -26,19 +29,20 @@ const About: React.FC = () => {
         About Us
       </motion.h2>
 
-      {/* Description Points */}
-      <div className="max-w-3xl mx-auto space-y-6">
+      {/* Points Grid */}
+      <div className="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {points.map((point, index) => (
-          <motion.p
+          <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="text-gray-300 text-center text-lg sm:text-xl"
+            className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-lg hover:scale-105 transition-transform duration-300"
           >
-            {point}
-          </motion.p>
+            <h3 className="text-xl font-semibold text-white mb-2">{point.title}</h3>
+            <p className="text-gray-300 text-sm sm:text-base">{point.desc}</p>
+          </motion.div>
         ))}
       </div>
     </section>

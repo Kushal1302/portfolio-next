@@ -72,7 +72,7 @@ const Projects: React.FC = () => {
 
   return (
     <section
-      id="projects"
+      id="works"
       className="py-20 px-6 bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155]"
     >
       <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-12">

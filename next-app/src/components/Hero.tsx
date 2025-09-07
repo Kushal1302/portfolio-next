@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] overflow-hidden px-6">
+    <section id="home" className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] overflow-hidden px-6">
       {/* Floating decorative shapes */}
       <motion.div
         animate={{ y: [0, -20, 0] }}

@@ -8,10 +8,10 @@ const page = () => {
   return (
     <div>
       <Hero />
+      <About/>
       <Projects />
       {/* Contact component can be added here if needed */}
       <Contact />
-      <About/>
     </div>
   );
 };
