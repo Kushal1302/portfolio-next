@@ -1,64 +1,74 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 const Hero: React.FC = () => {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
-  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    console.error("Video failed to load:", e);
-  };
-
   return (
-    <section className="relative w-full min-h-[80vh] flex items-center justify-center bg-[#1E3A8A] overflow-hidden">
-      {/* Background Video - Ensure hero-video.mp4 and hero-fallback.jpg are in the public folder */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        poster="/hero-fallback.jpg"
-        onError={handleVideoError}
-      >
-        <source src="/hero-video.mp4" type="video/mp4" />
-        <div className="absolute inset-0 flex items-center justify-center text-[#E5E7EB] text-lg">
-          Video not supported or failed to load. Please check the console for errors.
-        </div>
-      </video>
-      {/* Overlay for better text readability */}
-      <div className="absolute inset-0  bg-opacity-30 z-10"></div>
+    <section className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] overflow-hidden px-6">
+      {/* Floating decorative shapes */}
+      <motion.div
+        animate={{ y: [0, -20, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-10 left-10 w-32 h-32 rounded-full bg-[#6C63FF]/20 blur-3xl"
+      />
+      <motion.div
+        animate={{ y: [0, 20, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-20 right-10 w-40 h-40 rounded-full bg-[#8B5CF6]/20 blur-3xl"
+      />
 
-      <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-        <h1
-          className={`text-4xl sm:text-5xl lg:text-6xl font-bold text-[#E5E7EB] mb-4 transition-opacity duration-700 ease-in-out delay-100 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
+      {/* Overlay for extra glass effect */}
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
+
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={{
+          visible: {
+            transition: { staggerChildren: 0.2 },
+          },
+        }}
+        className="relative z-20 max-w-4xl text-center"
+      >
+        <motion.h1
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6"
         >
-          Build Your Vision with Expert Freelancing
-        </h1>
-        <p
-          className={`text-lg sm:text-xl text-[#E5E7EB] mb-8 max-w-2xl mx-auto transition-opacity duration-700 ease-in-out delay-200 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
+          Build Your Vision with{" "}
+          <span className="bg-gradient-to-r from-[#6C63FF] to-[#8B5CF6] bg-clip-text text-transparent">
+            Expert Freelancing
+          </span>
+        </motion.h1>
+
+        <motion.p
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.6 }}
+          className="text-lg sm:text-xl text-gray-300 mb-8"
         >
-          We deliver innovative, high-quality solutions tailored to your needs. Let’s create something extraordinary together.
-        </p>
-        <a
+          We deliver innovative, high-quality solutions tailored to your needs.
+          Let’s create something extraordinary together.
+        </motion.p>
+
+        <motion.a
+          variants={{
+            hidden: { opacity: 0, scale: 0.95 },
+            visible: { opacity: 1, scale: 1 },
+          }}
+          transition={{ duration: 0.6 }}
           href="#contact"
-          className={`inline-flex items-center justify-center rounded-full bg-[#272757] text-[#ffffff] font-medium text-base sm:text-lg h-12 px-6 sm:px-8 hover:bg-[#0F0E47] transition-all duration-300 ease-in-out transform ${
-            isVisible
-              ? "opacity-100 translate-y-0 scale-100"
-              : "opacity-0 translate-y-4 scale-95"
-          }`}
+          className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#6C63FF] to-[#8B5CF6] text-white font-medium px-8 py-3 hover:from-[#5B55E0] hover:to-[#7C3AED] transition-transform duration-300 shadow-lg"
         >
           Start Your Project
-        </a>
-      </div>
+        </motion.a>
+      </motion.div>
     </section>
   );
 };
