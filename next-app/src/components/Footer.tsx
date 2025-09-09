@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
 
         {/* Links */}
         <div className="flex space-x-6">
-          {["Home", "Projects", "Contact"].map((item) => (
+          {["Home", "Works", "About", "Contact"].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
