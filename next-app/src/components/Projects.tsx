@@ -25,24 +25,46 @@ const Projects: React.FC = () => {
       link: "https://prepinterview-c86r.vercel.app/",
       tech: ["Next.js", "Tailwind CSS", "AI/ML"],
     },
-    // {
-    //   id: 2,
-    //   title: "AI Chatbot Dashboard",
-    //   description:
-    //     "Our interactive dashboard monitors AI chatbot performance with real-time analytics and stunning visualizations.",
-    //   image: "/project2.jpg",
-    //   link: "https://github.com/yourusername/ai-dashboard",
-    //   tech: ["React", "Chart.js", "Node.js"],
-    // },
-    // {
-    //   id: 3,
-    //   title: "Mobile Fitness App",
-    //   description:
-    //     "We crafted a cross-platform fitness app with workout plans, progress tracking, and seamless social sharing.",
-    //   image: "/project3.jpg",
-    //   link: "https://github.com/yourusername/fitness-app",
-    //   tech: ["React Native", "Firebase", "Redux"],
-    // },
+    {
+      id: 2,
+      title: "Factuon - Invoicing Portal",
+      description:
+        "world-class invoicing platform. Our interactive dashboard monitors invoices with real-time analytics and stunning visualizations.",
+      image: "/factuon.png",
+      link: "https://factuon.com",
+      tech: [
+        "React",
+        "Next.js",
+        "Node.js",
+        "Shadcn UI",
+        "Tailwind CSS",
+        "React Email",
+        "Prisma",
+        "PostgreSQL",
+        "AWS",
+        "Scanner",
+        "Chatgpt API",
+        "React Native",
+      ],
+    },
+    {
+      id: 3,
+      title: "AMUS SOFT - Portfolio Website",
+      description:
+        "We crafted a stunning portfolio website showcasing our projects and expertise.",
+      image: "/amussoft.png",
+      link: "https://amussoft.com",
+      tech: [
+        "Next.js",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Shadcn UI",
+        "AWS",
+        "Blogs",
+        "SEO",
+        "Analytics",
+      ],
+    },
   ];
 
   useEffect(() => {
@@ -103,7 +125,9 @@ const Projects: React.FC = () => {
               <h3 className="text-xl font-semibold text-white mb-2">
                 {project.title}
               </h3>
-              <p className="text-sm text-gray-300 mb-4">{project.description}</p>
+              <p className="text-sm text-gray-300 mb-4">
+                {project.description}
+              </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tech.map((tag) => (
                   <span
