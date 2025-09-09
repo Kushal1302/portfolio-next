@@ -18,31 +18,45 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "StackMates | Build Your Vision with Expert Freelancing",
   description:
-    "StackMates is a collaborative dev studio delivering high-quality, innovative solutions. From web apps to full-stack projects, we help you build your vision with the right team.",
+    "StackMates is a professional dev studio specializing in custom web apps, full-stack development, and scalable solutions. We use Next.js, React, Node.js, and Tailwind to bring your ideas to life.",
   keywords: [
     "StackMates",
-    "software development",
-    "freelance team",
-    "web development",
+    "software development agency",
+    "web development services",
     "app development",
+    "Next.js development",
+    "React developers",
+    "Node.js backend",
+    "freelance software team",
+    "custom web apps",
     "full stack development",
-    "Next.js",
-    "React",
-    "Tailwind",
-    "custom projects",
+    "Tailwind CSS",
+    "TypeScript projects",
+    "UI UX design",
   ],
+  authors: [{ name: "StackMates" }],
+  creator: "StackMates",
+  publisher: "StackMates",
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+  },
+  alternates: {
+    canonical: "https://stackmates-v1.vercel.app",
+  },
   openGraph: {
     title: "StackMates | Build Your Vision with Expert Freelancing",
     description:
-      "StackMates delivers innovative, high-quality software solutions. Let’s create something extraordinary together.",
-    url: "https://stackmates.com", // replace with your real domain
+      "StackMates delivers high-quality, scalable solutions using Next.js, React, Node.js, and Tailwind. Let’s build your vision together.",
+    url: "https://stackmates-v1.vercel.app",
     siteName: "StackMates",
     images: [
       {
-        url: "/og.png", // add an OG image in /public
+        url: "https://stackmates-v1.vercel.app/hero-bg3.png",
         width: 1200,
         height: 630,
-        alt: "StackMates - Build Your Vision",
+        alt: "StackMates - Professional Web & App Development",
       },
     ],
     locale: "en_US",
@@ -50,14 +64,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "StackMates | Build Your Vision with Expert Freelancing",
+    title: "StackMates | Web & App Development Studio",
     description:
-      "Collaborative dev studio delivering top-notch, innovative web and app solutions.",
-    images: ["/og.png"],
+      "Next.js, React & Node.js experts delivering innovative full-stack solutions.",
+    images: ["https://stackmates-v1.vercel.app/hero-bg3.png"],
   },
   icons: {
     icon: "/favicon.ico",
   },
+  themeColor: "#6C63FF",
 };
 
 export default function RootLayout({
