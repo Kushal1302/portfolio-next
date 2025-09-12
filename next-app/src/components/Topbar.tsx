@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Topbar: React.FC = () => {
@@ -6,20 +7,37 @@ const Topbar: React.FC = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  const { push } = useRouter();
+
   return (
     <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-      <div className="backdrop-blur-md bg-white/20 border border-white/30 rounded-2xl shadow-lg px-6 py-3 flex items-center justify-between w-[100%] max-w-md gap-4">
+      <div className="backdrop-blur-md bg-white/20 border border-white/30 rounded-2xl shadow-lg px-6 py-3 flex items-center justify-between w-[100%]  gap-4">
         {/* Brand */}
-        <span className="font-extrabold text-xl text-[#fff]">
+        <span
+          className="font-extrabold text-xl text-[#fff] cursor-pointer"
+          onClick={() => push("/")}
+        >
           Stack<span className="text-[#6C63FF]">Mates</span>
         </span>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6">
-          {["Home", "Works", "About", "Contact"].map((item) => (
+          {[
+            "Home",
+            "Works",
+            "About",
+            "Contact",
+            "Services",
+            "FAQs",
+            "Pricing",
+          ].map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`${
+                ["services", "faqs", "pricing"].includes(item.toLowerCase())
+                  ? `/${item.toLowerCase()}`
+                  : `/#${item.toLowerCase()}`
+              }`}
               className="text-[#fff] font-medium hover:text-[#6C63FF] transition-colors relative group"
             >
               {item}
@@ -60,10 +78,22 @@ const Topbar: React.FC = () => {
       {isMenuOpen && (
         <div className="absolute mt-3 left-1/2 transform -translate-x-1/2 w-56 backdrop-blur-md bg-white/30 border border-white/20 rounded-2xl shadow-xl md:hidden">
           <ul className="flex flex-col items-center py-4 space-y-4">
-            {["Home", "Works", "About", "Contact"].map((item) => (
+            {[
+              "Home",
+              "Works",
+              "About",
+              "Contact",
+              "Services",
+              "FAQs",
+              "Pricing",
+            ].map((item) => (
               <li key={item}>
                 <a
-                  href={`#${item.toLowerCase()}`}
+                  href={`${
+                    ["services", "faqs", "pricing"].includes(item.toLowerCase())
+                      ? `/${item.toLowerCase()}`
+                      : `/#${item.toLowerCase()}`
+                  }`}
                   onClick={toggleMenu}
                   className="text-[#fff] font-semibold hover:text-[#6C63FF] transition-colors"
                 >

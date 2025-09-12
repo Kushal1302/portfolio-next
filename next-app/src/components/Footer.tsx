@@ -1,6 +1,6 @@
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#0f172a] py-8 mt-12 text-gray-300">
+    <footer className="bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#0f172a] py-8 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
         {/* Brand / Logo */}
         <div className="flex items-center">
@@ -11,10 +11,22 @@ const Footer: React.FC = () => {
 
         {/* Links */}
         <div className="flex space-x-6">
-          {["Home", "Works", "About", "Contact"].map((item) => (
+          {[
+            "Home",
+            "Works",
+            "About",
+            "Contact",
+            "Services",
+            "FAQs",
+            "Pricing",
+          ].map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`${
+                ["services", "faqs", "pricing"].includes(item.toLowerCase())
+                  ? `/${item.toLowerCase()}`
+                  : `/#${item.toLowerCase()}`
+              }`}
               className="text-sm text-gray-300 hover:text-[#6C63FF] transition-colors"
             >
               {item}
@@ -24,7 +36,7 @@ const Footer: React.FC = () => {
 
         {/* Social Icons */}
         <div className="flex space-x-4">
-          <a
+          {/* <a
             href="https://twitter.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -33,9 +45,9 @@ const Footer: React.FC = () => {
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M19.633 7.997c.014.2.014.4.014.6 0 6.123-4.66 13.188-13.188 13.188-2.622 0-5.064-.77-7.125-2.1.363.043.713.057 1.09.057 2.174 0 4.175-.742 5.764-2.002-2.03-.043-3.737-1.377-4.328-3.22.286.057.572.086.872.086.414 0 .828-.057 1.214-.157-2.13-.429-3.724-2.317-3.724-4.59v-.057c.629.357 1.357.572 2.13.6-1.272-.857-2.116-2.303-2.116-3.948 0-.872.229-1.657.629-2.36 2.303 2.83 5.757 4.703 9.639 4.903-.072-.343-.115-.7-.115-1.058 0-2.603 2.13-4.717 4.717-4.717 1.357 0 2.574.572 3.432 1.5 1.072-.2 2.088-.6 2.988-1.13-.357 1.115-1.115 2.074-2.116 2.66 1-.115 1.944-.386 2.831-.772-.686.972-1.544 1.83-2.545 2.517z" />
             </svg>
-          </a>
+          </a> */}
           <a
-            href="https://github.com"
+            href="https://github.com/Kushal1302/portfolio-next"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[#6C63FF] transition-colors"
