@@ -87,7 +87,9 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <Topbar />
-        {children}
+        <div className="">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>
